@@ -1,0 +1,76 @@
+{% extends 'main.html' %}
+{% block body %}
+{% load static %}
+
+<div class="container p-3 mt-5 bg-dark" style="background-color:#414141; border-top-right-radius: 1.5em !important; border-top-left-radius: 1.5em !important;">
+    <div class="row">
+        <div class="col-sm">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text bg-light">Wynik</span>
+                </div>
+                <span class="input-group-text bg-light" id="score"></span>
+                <span class="input-group-btn m-2" style="width:0px;"></span>
+            </div>
+        </div>
+
+        <div class="col-sm ">
+            <div class="input-group justify-content-end">
+                <div class="input-group-prepend m-1">
+                    <button type="button" class="btn btn-primary" id="skipPlayer" onclick="skipPlayer();">Pomiń</button>
+                </div>
+
+                <div class="input-group-prepend m-1">
+                    <a href="/" class="btn btn-danger">Zakończ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container p-5" style="background-color:#414141">
+
+    <div class="row ">
+        {% include 'whoMore/scatterCard.html' %}
+    </div>
+    <div class="row pt-5 d-flex align-items-center justify-content-center">
+        {% for char in surnameList %}
+        <div class="numberCircle d-flex align-items-center justify-content-center">{{char}}</div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <form id="checkSurnameScratter" method="post">
+            {% csrf_token %}
+            <div class="row justify-content-center">
+                <div class="col-md-5 form-group text-center">
+                    <label id="surnameLabel">Nazwisko</label>
+                    <input type="text" name='surname' class="form-control collectes-ville text-center"
+                           placeholder="Nazwisko piłkarza" id="campiagn_search_id">
+                    <input type="hidden" name='correctSurnameAnswer' value="{{surname}}">
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5 form-group text-center">
+                    <button class="btn checkPlayer m-4">Sprawdź <i class="fa fa-caret-right"></i></button>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+    <div class="row">
+        <div class=" justify-content-center">
+            <div class="text-center">
+                <div id="summary" class="p-3" style="display:none;
+   width:auto"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="container p-5 mb-5 bg-dark" style="background-color:#414141; border-bottom-right-radius: 1.5em !important; border-bottom-left-radius: 1.5em !important;">
+
+</div>
+
+{% endblock %}
