@@ -38,7 +38,7 @@ def guessWho(request):
                      [playerPosition, static('img/playerField.png')]]
     random.shuffle(playerDetails)
 
-    return render(request, 'guessWho.html', {
+    return render(request, 'guessWho/guessWho.html', {
         'playerDetails': playerDetails,
         'surname': surname
     })
@@ -93,7 +93,7 @@ def whoMore(request):
                randomPlayer1['playerDetails']['clubFlag'], randomPlayer1[randomData]]
     player2 = [randomPlayer2['player'], randomPlayer2['playerimg'], randomPlayer2['playerDetails']['nationFlag'],
                randomPlayer2['playerDetails']['clubFlag'], randomPlayer2[randomData]]
-    return render(request, 'whoMore.html', {'player1': player1, 'player2': player2, 'info': info})
+    return render(request, 'whoMore/whoMore.html', {'player1': player1, 'player2': player2, 'info': info})
 
 
 def checkWhoMore(request):
@@ -126,7 +126,7 @@ def scatter(request):
     surnameList = [*surname]
     random.shuffle(surnameList)
 
-    return render(request, 'scatter.html',
+    return render(request, 'scatter/scatter.html',
                   {'nation': nationality, "club": club, 'surnameList': surnameList, 'surname': surname})
 
 

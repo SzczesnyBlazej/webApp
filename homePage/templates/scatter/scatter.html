@@ -32,11 +32,11 @@
 <div class="container p-5" style="background-color:#414141">
 
     <div class="row ">
-        {% include 'whoMore/scatterCard.html' %}
+        {% include 'scatter/scatterCard.html' %}
     </div>
     <div class="row pt-5 d-flex align-items-center justify-content-center">
         {% for char in surnameList %}
-        <div class="numberCircle d-flex align-items-center justify-content-center">{{char}}</div>
+            <div class="numberCircle d-flex align-items-center justify-content-center">{{char}}</div>
         {% endfor %}
     </div>
     <div class="row">
@@ -62,8 +62,10 @@
     <div class="row">
         <div class=" justify-content-center">
             <div class="text-center">
-                <div id="summary" class="p-3" style="display:none;
-   width:auto"></div>
+                <div id="summary" class="p-3"
+                     style="display:none;
+                            width:auto">
+                </div>
             </div>
         </div>
     </div>

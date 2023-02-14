@@ -1,0 +1,33 @@
+{% load static %}
+
+<div class="col-sm-6 col-md-4 my-3 " onclick="flipCard()">
+    <div class="card h-100 cardStyle " style="background-color:#414141;">
+        <div class="card align-items-center flip-card ">
+            <div class="flip-card-inner ">
+                <div class="flip-card-front"
+                     style="background-color:#212529 !important; border-radius:15px;">
+                    <img src="{% static 'img/guesswho.jpg' %}"
+                         style="
+                                              border-radius:1.5em;"
+                         class="card-img-top">
+                </div>
+
+                <div class="flip-card-back h-100"
+                     style="display:none; border-radius:25px; background:linear-gradient(0deg,#6c757d 0%,#FFF29E 100%);">
+                    <div class="card-body m-2"
+                         style="background:linear-gradient(0deg,#FFD86E 0%,#FFF29E 100%);border-radius:1.5em;">
+                        <h5 class="card-title">
+                            {{playerDetail.0}}
+                        </h5>
+                    </div>
+
+                    <img src="{{playerDetail.1}}"
+                         style="
+                                     max-width: 60%;
+                                     max-height: 60%;"
+                         class="card-img-top ">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

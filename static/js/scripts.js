@@ -1,55 +1,76 @@
 
 $(document).ready(function () {
-    $('.flip-card').click(function () {
-        var index = $('.flip-card').index(this);
-        if (!$(this).hasClass("flipped")) {
-            $(this).toggleClass('flipped');
-            var x = $(this).find('.flip-card-front')
-            var y = $(this).find('.flip-card-back')
-            $(x).css("display", "none");
-            $(y).css("display", "inline-block");
-            var scoreToGet = $('#scoretoGet').text()
-            var xx = parseInt(scoreToGet);
-            $('#scoretoGet').html(xx - 1);
-        }
 
-    });
-    if(window.location.pathname =="/scatter/" || window.location.pathname =="/guessWho/"){
-       if(!(localStorage.getItem("wynik"))){
-       localStorage.setItem("wynik", 0);
-       localStorage.setItem("trial", 0);
-       }
-     }
-    if (window.location.pathname == "/guessWho/" || window.location.pathname == "/whoMore/" || window.location.pathname == "/scatter/") {
-        var odp = localStorage.getItem("wynik");
-        var trials = localStorage.getItem("trial");
 
-        if (!odp) {
-            $('#score').html(0);
-            $('#trial').html(0);
-        }
-        else {
+    checkPathName();
+    if (window.location.pathname == "/guessWho/") {
+        if (!(localStorage.getItem("wynik"))) {
+            localStorage.setItem("wynik", 0);
+            localStorage.setItem("trial", 0);
+            var odp = localStorage.getItem("wynik");
+            var trials = localStorage.getItem("trial");
             $('#score').html(odp);
             $('#trial').html(trials);
         }
+        else {
+            var odp = localStorage.getItem("wynik");
+            var trials = localStorage.getItem("trial");
+            $('#score').html(odp);
+            $('#trial').html(trials);
+        }
+        $('.flip-card').click(function () {
+            var index = $('.flip-card').index(this);
+            if (!$(this).hasClass("flipped")) {
+                $(this).toggleClass('flipped');
+                var x = $(this).find('.flip-card-front')
+                var y = $(this).find('.flip-card-back')
+                $(x).css("display", "none");
+                $(y).css("display", "inline-block");
+            }
+        });
     }
-    else {
-        localStorage.removeItem("wynik");
-        localStorage.removeItem("trial");
+    else if (window.location.pathname == "/whoMore/") {
+
+        if (!(localStorage.getItem("wynik"))) {
+            localStorage.setItem("wynik", 0);
+            var odp = localStorage.getItem("wynik");
+            $('#score').html(odp);
+        }
+        else {
+            var odp = localStorage.getItem("wynik");
+            $('#score').html(odp);
+        }
+    }
+    else if (window.location.pathname == "/scatter/") {
+
+        if (!(localStorage.getItem("wynik"))) {
+            localStorage.setItem("wynik", 0);
+            var odp = localStorage.getItem("wynik");
+            $('#score').html(odp);
+        }
+        else {
+            var odp = localStorage.getItem("wynik");
+            $('#score').html(odp);
+        }
     }
 
-     
+
+    function checkPathName() {
+        if ((localStorage.getItem("currentPathname")) !== window.location.pathname) {
+            localStorage.removeItem("wynik");
+            localStorage.removeItem("trial");
+            localStorage.setItem("currentPathname", window.location.pathname);
+        }
+    }
+
 
     $('#my-form').submit(function (event) {
         event.preventDefault();
         var surname = $('input[name="surname"]').val();
         var correctAnswer = $('input[name="correctAnswer"]').val();
         var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-        var scoreToGet = $('#scoretoGet').text();
-        var wynik = $('#score').text();
         var removeWrongAnswer = function () {
             var wrongAnswer = $('#summary');
-
             wrongAnswer.animate({
                 opacity: "-=1"
             }, 1000, function () {
@@ -66,8 +87,11 @@ $(document).ready(function () {
                 correctAnswer: correctAnswer,
             },
             success: function (data) {
-                var trail = parseInt($('#trial').text());
-                $('#trial').html(trail + 1);
+                // var trail = parseInt($('#trial').text());
+
+                $('#trial').html(localStorage.getItem("trial"));
+                localStorage.setItem("trial", 1 + +localStorage.getItem("trial"));
+                $('#trial').html(localStorage.getItem("trial"));
                 var x = data
                 if (x == 'Błędna odpowiedź') {
                     var wrongAnswer = $('#summary');
@@ -78,11 +102,7 @@ $(document).ready(function () {
                 }
                 else {
                     var scoreToGet = parseInt($('#scoretoGet').text());
-                    var trial = parseInt($('#trial').text());
-                    var wynik = parseInt($('#score').text());
-
-                    localStorage.setItem("wynik", scoreToGet + wynik);
-                    localStorage.setItem("trial", trial);
+                    localStorage.setItem("wynik", scoreToGet + +localStorage.getItem("wynik"));
                     window.location.href = "/guessWho";
 
                 }
@@ -90,6 +110,7 @@ $(document).ready(function () {
         });
         return false;
     });
+
 
     $(".radio-content").click(function () {
         $(".radio-content").removeClass("selected");
@@ -111,21 +132,19 @@ $(document).ready(function () {
             success: function (data) {
                 var x = data;
 
-                var score = parseInt($('#score').text());
-
                 if (x != 'Błędna odpowiedź') {
                     $(".selected").find('div.cardStyle').css("background", "linear-gradient(#19A186, #F2CF43)");
                     $(".hideAnswer").css('display', 'none');
                     $(".showAnswer").css('display', 'inline-block');
-                    $('#score').html(score + 1);
-                    localStorage.setItem("wynik", score + 1);
+                    $('#score').html(1 + +localStorage.getItem("wynik"));
+                    localStorage.setItem("wynik", 1 + +localStorage.getItem("wynik"));
                     skipPlayer(1500);
 
                 }
                 else {
                     $(".selected").find('div.cardStyle').css("background", "linear-gradient(#FE0944, #FEAE96)");
                     $("#modalContentText").html(data);
-                    $("#currentScore").html(' ' + score + 'pkt');
+                    $("#currentScore").html(' ' + +localStorage.getItem("wynik") + 'pkt');
                     $("#bsModal3").modal('show');
                     localStorage.removeItem("wynik");
                     $(".hideAnswer").css('display', 'none');
@@ -136,6 +155,7 @@ $(document).ready(function () {
             }
         });
     });
+
 
     $('#campiagn_search_id').on('keyup', function () {
         var answer = $("#campiagn_search_id")[0].value;
@@ -161,15 +181,13 @@ $(document).ready(function () {
         });
     });
 
+
     $('#checkSurnameScratter').submit(function (event) {
         event.preventDefault();
         var myAnswer = $("#campiagn_search_id")[0].value;
         var correctAnswer = $("input[name='correctSurnameAnswer']")[0].value;
-        var odp = localStorage.getItem("wynik");
         var answerLabel = $('#summary');
-        var scoreToGet = $('#score').text()
-        var xx = parseInt(scoreToGet);
-        myAnswer=myAnswer.toLowerCase();
+        myAnswer = myAnswer.toLowerCase();
         correctAnswer = correctAnswer.toLowerCase();
         function animateAnswerLabel() {
             answerLabel.animate({
@@ -179,18 +197,17 @@ $(document).ready(function () {
                 $(answerLabel).css("display", "none");
             });
         }
-        var originalAnswer=correctAnswer;
-        correctAnswer=removeDiacritics(correctAnswer);
-        myAnswer=removeDiacritics(myAnswer);
-
+        var originalAnswer = correctAnswer;
+        correctAnswer = removeDiacritics(correctAnswer);
+        myAnswer = removeDiacritics(myAnswer);
 
         if (myAnswer == correctAnswer) {
             $(answerLabel).css("display", "inline-block");
             $(answerLabel).css("opacity", "1");
             $(answerLabel).css("background", "linear-gradient(#19A186, #F2CF43)");
             $(answerLabel).html('Poprawna odpowiedź!');
-            localStorage.setItem("wynik", parseInt(odp) + 1);
-            $('#score').html(xx + 1);
+            localStorage.setItem("wynik", 1 + +localStorage.getItem("wynik"));
+            $('#score').html(+localStorage.getItem("wynik"));
             $('#campiagn_search_id').val('');
             $('#answerOne').html(originalAnswer.charAt(0).toUpperCase() + originalAnswer.slice(1));
             skipPlayer(3000);
@@ -206,6 +223,8 @@ $(document).ready(function () {
     });
 
 });
+
+
 function skipPlayer(value) {
     $(document).ready(function () {
         setTimeout(function () {
@@ -213,9 +232,10 @@ function skipPlayer(value) {
         }, value);
     });
 }
+
+
 function removeDiacritics(input) {
     var output = "";
-
     var normalized = input.normalize("NFD");
     var i = 0;
     var j = 0;
