@@ -12,9 +12,9 @@ SECRET_KEY = 'django-insecure-)b-6y$23jf!0o=wfdga(u!)0-pc_80jpb#+%^lrebj%(*zj*x+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 # for pythonanywhere
-# ALLOWED_HOSTS = ['blazej2533.pythonanywhere.com']
+ALLOWED_HOSTS = ['blazej2533.pythonanywhere.com']
 
 
 # Application definition
@@ -105,16 +105,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-]
-# for pythonanywhere
-# STATIC_URL = '/static/'
-# STATIC_ROOT = '/home/blazej2533/webApp/webApp/static'
+# STATIC_URL = 'static/'
 # STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'static'),
+#     os.path.join(BASE_DIR, "static"),
 # ]
+# for pythonanywhere
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/blazej2533/webApp/webApp/static'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
