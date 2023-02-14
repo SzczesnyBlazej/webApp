@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-)b-6y$23jf!0o=wfdga(u!)0-pc_80jpb#+%^lrebj%(*zj*x+
 DEBUG = True
 
 ALLOWED_HOSTS = []
+# if deploy
+# ALLOWED_HOSTS = ['blazej2533.pythonanywhere.com']
 
 
 # Application definition
@@ -121,6 +123,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# if deploy
+# STATIC_URL = '/static/'
+# STATIC_ROOT = '/home/blazej2533/webApp/static'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'),
+# ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
