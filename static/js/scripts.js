@@ -26,6 +26,8 @@ $(document).ready(function () {
                 var y = $(this).find('.flip-card-back')
                 $(x).css("display", "none");
                 $(y).css("display", "inline-block");
+                var scoreToGet = parseInt($('#scoretoGet').text())
+                $('#scoretoGet').html(scoreToGet - 1);
             }
         });
     }
