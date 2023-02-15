@@ -1,24 +1,41 @@
 {% load static %}
 
+<nav class="navbar navbar-expand-lg navbar-light shadow" style="background:#212529">
+    <div class="container-fluid">
+        <a class="navbar-brand mx-auto" href="/"><img style="width:6em; margin-left: 2.25em;" class="img-fluid"
+                                              src="{% static 'img/vs.png'%}">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-<div class="container-fluid navbar-light shadow p-3 bg-dark">
-    <div class="row ">
-        <div class="col d-flex justify-content-center">
-            <div class="col d-flex justify-content-center"><h5><a class="nav-item nav-link" href="#">Upcoming Games</a></h5></div>
-            <div class="col d-flex justify-content-center"><h5><a class="nav-item nav-link" href="#">Recent Results</a></h5></div>
-            <div class="col d-flex justify-content-center"><h5><a class="nav-item nav-link" href="#">Standings</a></h5></div>
-        </div>
-        <div class="col d-flex justify-content-center">
-            <div class="col d-flex justify-content-center"><h4><a href="/" class="nav-item nav-link">Soccer Website</a>
-            </h4></div>
-        </div>
-        <div class="col d-flex justify-content-center">
-            <div class="col d-flex justify-content-center"><h5><a class="nav-item nav-link" href="#">Facebook</a></h5></div>
-            <div class="col d-flex justify-content-center"><h5><a class="nav-item nav-link" href="#">Twitter</a></h5></div>
-            <div class="col d-flex justify-content-center"><h5><a class="nav-item nav-link" href="#">Instagram</a></h5></div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="container-fluid navbar-light p-3 bg-dark">
+                <div class="row">
+                    <div class="col d-flex justify-content-center">
+                            <h5>
+                                <a class="nav-item nav-link" href="/guessWho">Guess Who</a>
+                            </h5>
+
+                            <h5>
+                                <a class="nav-item nav-link" href="/whoMore">Who More</a>
+                            </h5>
+
+                            <h5>
+                                <a class="nav-item nav-link" href="/scatter">Scatter</a>
+                            </h5>
+                    </div>
+                    <div class="col-md-auto d-flex justify-content-end">
+                        <a class="nav-item nav-link" href="#"><i class="fa-brands fa-facebook fa-xl"></i></a>
+                        <a class="nav-item nav-link" href="#"><i class="fa-brands fa-instagram fa-xl"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</nav>
+
+
 
 
 
