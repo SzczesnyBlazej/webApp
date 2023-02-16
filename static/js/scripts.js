@@ -44,7 +44,9 @@ $(document).ready(function () {
         }
     }
     else if (window.location.pathname == "/scatter/") {
-
+        $(window).on('beforeunload', function(){
+            localStorage.removeItem("firstLetterOfSurname");
+        });
         if (!(localStorage.getItem("wynik"))) {
             localStorage.setItem("wynik", 0);
             var odp = localStorage.getItem("wynik");
@@ -61,6 +63,7 @@ $(document).ready(function () {
         if ((localStorage.getItem("currentPathname")) !== window.location.pathname) {
             localStorage.removeItem("wynik");
             localStorage.removeItem("trial");
+            localStorage.removeItem("firstLetterOfSurname");
             localStorage.setItem("currentPathname", window.location.pathname);
         }
     }
@@ -179,6 +182,9 @@ $(document).ready(function () {
                 for (var i = 0; i < x.length; i++) {
                     $(myCircles[x[i]]).css("background", "linear-gradient(#19A186, #F2CF43)");
                 }
+                if (localStorage.getItem("firstLetterOfSurname")) {
+                    advicesForScatter();
+                }
             }
         });
     });
@@ -212,6 +218,7 @@ $(document).ready(function () {
             $('#score').html(+localStorage.getItem("wynik"));
             $('#campiagn_search_id').val('');
             $('#answerOne').html(originalAnswer.charAt(0).toUpperCase() + originalAnswer.slice(1));
+            localStorage.removeItem("firstLetterOfSurname");
             skipPlayer(3000);
         }
         else {
@@ -230,6 +237,7 @@ $(document).ready(function () {
 function skipPlayer(value) {
     $(document).ready(function () {
         setTimeout(function () {
+            localStorage.removeItem("firstLetterOfSurname");
             location.reload();
         }, value);
     });
@@ -250,4 +258,32 @@ function removeDiacritics(input) {
     }
 
     return output;
+}
+function advicesForGuessWho(){
+    var cardsToBeUnveiled = $(document).find(".card .align-items-center").not('.flipped');
+    var randomCard = cardsToBeUnveiled[Math.floor(Math.random() * cardsToBeUnveiled.length)];
+    $(randomCard).click();
+}
+
+function advicesForScatter(){
+    var correctAnswer = $('input[name="correctSurnameAnswer"]').val();
+
+    if (!(localStorage.getItem("firstLetterOfSurname"))) {
+        localStorage.setItem("firstLetterOfSurname", correctAnswer[0]);
+        var firstLetter=localStorage.getItem("firstLetterOfSurname");
+    }
+    else {
+        var firstLetter=localStorage.getItem("firstLetterOfSurname");
+
+    }
+    var inputs = $.map($('.numberCircle'), function (div) {
+            return div.innerHTML
+        });
+    var myCircles = $('.numberCircle');
+    for(var i=0; i<inputs.length;i++){
+        if(inputs[i]==firstLetter){
+            $(myCircles[i]).css("background", "linear-gradient(#19A186, #F2CF43)");
+            return false;
+        }
+    }
 }
