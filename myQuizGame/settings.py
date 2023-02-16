@@ -25,9 +25,7 @@ SECRET_KEY = 'django-insecure-)b-6y$23jf!0o=wfdga(u!)0-pc_80jpb#+%^lrebj%(*zj*x+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-# if deploy
-# ALLOWED_HOSTS = ['blazej2533.pythonanywhere.com']
+ALLOWED_HOSTS = ['blazej2533.pythonanywhere.com','127.0.0.1']
 
 
 # Application definition
@@ -40,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'homePage',
+    'games',
 ]
 
 MIDDLEWARE = [
