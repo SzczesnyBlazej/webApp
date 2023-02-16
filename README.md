@@ -15,6 +15,7 @@
     * Zdjęcie piłkarza
 2) Im więcej kart odkryjesz tym mniej punktów możesz zdobyć
 3) Maksymalna ilość punktów do zdobycia wynosi 7 dla każdego piłkarza
+4) Masz możliwość użycia wskazówki, która odkrywa losową kartę
 
 # GuessWho
 
@@ -32,6 +33,7 @@
 2) Z rozsypanych liter ułóż nazwisko piłkarza
 3) Wprowadzone literki zaznaczają się na zielono aby ułatwić sprawdzenie użytych liter
 4) Za każde odganięte nazwisko otrzymujesz 1 pkt
+5) Masz możliwość użycia wskazówki, która wskazuje pierwszą literę nazwiska piłkarza
 
 
 ### W każdej grze możesz pominąć bieżące wylosowania piłkarzy nie tracąc szansy na zdobycie kolejnych punktów.
