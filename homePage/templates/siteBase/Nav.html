@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow" style="background:#212529">
     <div class="container-fluid">
         <a class="navbar-brand mx-auto" href="/"><img style="width:6em; margin-left: 2.25em;" class="img-fluid"
-                                              src="{% static 'img/logo.png'%}">
+                                                      src="{% static 'img/logo.png'%}">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -13,21 +13,46 @@
             <div class="container-fluid navbar-light p-3 bg-dark">
                 <div class="row">
                     <div class="col d-flex justify-content-center">
-                            <h5>
-                                <a class="nav-item nav-link" href="/guessWho">Guess Who</a>
-                            </h5>
+                        <h5>
+                            <a class="nav-item nav-link" href="/guessWho">Guess Who</a>
+                        </h5>
 
-                            <h5>
-                                <a class="nav-item nav-link" href="/whoMore">Who More</a>
-                            </h5>
+                        <h5>
+                            <a class="nav-item nav-link" href="/whoMore">Who More</a>
+                        </h5>
 
-                            <h5>
-                                <a class="nav-item nav-link" href="/scatter">Scatter</a>
-                            </h5>
+                        <h5>
+                            <a class="nav-item nav-link" href="/scatter">Scatter</a>
+                        </h5>
                     </div>
                     <div class="col-md-auto d-flex justify-content-end">
                         <a class="nav-item nav-link" href="#"><i class="fa-brands fa-facebook fa-xl"></i></a>
                         <a class="nav-item nav-link" href="#"><i class="fa-brands fa-instagram fa-xl"></i></a>
+                        <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
+    Register
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="register-form-wrapper">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
                     </div>
                 </div>
             </div>

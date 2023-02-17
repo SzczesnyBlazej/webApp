@@ -1,7 +1,38 @@
+$(document).ready(function() {
+    $('#registerModal').on('show.bs.modal', function (e) {
+        var modal = $(this);
+        var url = "/register/";
+        $.ajax({
+            url: url,
+            type: 'get',
+            success: function(data) {
+                modal.find('#register-form-wrapper').html(data);
+            }
+        });
+    });
+
+    $(document).on('submit', '#register-form', function(event) {
+        event.preventDefault();
+        var url = "/register/";
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: $('#register-form').serialize(),
+            success: function(data) {
+                if (data.success) {
+                    window.location.href = "{% url '/' %}";
+                } else {
+                    $('#register-form').html(data);
+                }
+            }
+        });
+    });
+});
+
+
+
 
 $(document).ready(function () {
-
-
     checkPathName();
     if (window.location.pathname == "/guessWho/") {
         if (!(localStorage.getItem("wynik"))) {
