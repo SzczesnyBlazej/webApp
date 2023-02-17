@@ -20,9 +20,9 @@ $(document).ready(function() {
             data: $('#register-form').serialize(),
             success: function(data) {
                 if (data.success) {
-                    window.location.href = "{% url '/' %}";
+                    window.location.href = "/";
                 } else {
-                    $('#register-form').html(data);
+                    $('#register-form').html(data.error);
                 }
             }
         });

@@ -15,6 +15,7 @@ def register(request):
             user = form.save()
             return JsonResponse({'success': True})
         else:
+            print(form.errors)
             return JsonResponse({'errors': form.errors})
     else:
         form = SignUpForm()
