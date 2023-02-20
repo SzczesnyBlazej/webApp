@@ -1,3 +1,4 @@
+// ### rejestracja
 $(document).ready(function() {
     $('#registerModal').on('show.bs.modal', function (e) {
         var modal = $(this);
@@ -22,13 +23,49 @@ $(document).ready(function() {
                 if (data.success) {
                     window.location.href = "/";
                 } else {
-                    $('#register-form').html(data.error);
+
+                    $('#register-form-wrapper').html(data);
+
                 }
             }
         });
     });
 });
 
+// ### login
+
+$(document).ready(function() {
+    $('#loginModal').on('show.bs.modal', function (e) {
+        var modal = $(this);
+        var url = "/login/";
+        $.ajax({
+            url: url,
+            type: 'get',
+            success: function(data) {
+                modal.find('#login-form-wrapper').html(data);
+            }
+        });
+    });
+
+    $(document).on('submit', '#login-form', function(event) {
+        event.preventDefault();
+        var url = "/login/";
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: $('#login-form').serialize(),
+            success: function(data) {
+                if (data.success) {
+                    window.location.href = "/";
+                } else {
+
+                    $('#login-form-wrapper').html(data);
+
+                }
+            }
+        });
+    });
+});
 
 
 

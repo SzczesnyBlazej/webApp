@@ -1,10 +1,32 @@
 {% load static %}
 <form method="post" id="register-form">
     {% csrf_token %}
-        <div class="form-control bg-dark text-light">
-            {{ form.as_p }}
+    <div class="form-control bg-dark text-light">
+        {{ form.non_field_errors }}
+        {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.label_tag }}
+            {% if field.errors %}
+            {{ field.errors }}
+            {% endif %}
+            {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }} x</p>
+            {% endif %}
         </div>
-        <div class="col-md-12 text-center p-3">
-            <button type="submit" class="signupBtn">Register</button>
-        </div>
+        {% endfor %}
+
+    </div>
+    <div class="col-md-12 text-center p-3">
+        <button type="submit" class="signupBtn">Register</button>
+    </div>
+    <p class="text-center text-light">Masz już konto?
+        <a class="dropdown-item buttonInModal"
+           type="button"
+           data-bs-toggle="modal"
+           data-bs-target="#loginModal"
+           onclick="$('#registerModal').modal('hide')">
+            Zaloguj się
+        </a>
+    </p>
 </form>

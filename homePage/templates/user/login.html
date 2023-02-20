@@ -1,0 +1,26 @@
+{% load static %}
+{% for message in messages %}
+<p class="text-center text-danger">{{message}}</p>
+{% endfor %}
+<form method="post" id="login-form">
+    {% csrf_token %}
+    <div class="form-control bg-dark text-light">
+        <label for="username">Login lub adres Email:</label>
+        <input type="text" id="username" name="username">
+
+        <label for="password">Hasło:</label>
+        <input type="password" id="password" name="password">
+
+    </div>
+    <div class="col-md-12 text-center p-3">
+        <button type="submit" class="loginBtn">Login</button>
+    </div>
+    <p class="text-center text-light">Nie posiadasz konta?
+        <a class="dropdown-item buttonInModal"
+           type="button" data-bs-toggle="modal"
+           data-bs-target="#registerModal"
+           onclick="$('#loginModal').modal('hide')">
+            Zarejestruj się
+        </a>
+    </p>
+</form>

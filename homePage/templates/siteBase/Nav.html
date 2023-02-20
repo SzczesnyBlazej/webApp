@@ -29,6 +29,32 @@
                         <a class="nav-item nav-link" href="#"><i class="fa-brands fa-facebook fa-xl"></i></a>
                         <a class="nav-item nav-link" href="#"><i class="fa-brands fa-instagram fa-xl"></i></a>
                         {% include 'user/registerModal.html' %}
+                        {% include 'user/loginModal.html' %}
+                        <div class="dropdown">
+                            <a href="#"
+                               id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="fa fa-user userIcon"></span>
+                                <p>Profil</p>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light text-small shadow dropdown-menu-end">
+                                {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="#">{{ user.get_username }}</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                {% else %}
+                                <li><a class="dropdown-item" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#loginModal">Zaloguj się</a></li>
+                                    <li><a class="dropdown-item" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#registerModal">Zarejestruj się</a></li>
+
+                                {% endif %}
+                                {% if user.is_authenticated %}
+
+                                <li><a class="dropdown-item" href="/logout">Wyloguj</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
