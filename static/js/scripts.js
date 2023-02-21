@@ -160,8 +160,7 @@ $(document).ready(function () {
                 correctAnswer: correctAnswer,
             },
             success: function (data) {
-                // var trail = parseInt($('#trial').text());
-
+                addScoreToRank();
                 $('#trial').html(localStorage.getItem("trial"));
                 localStorage.setItem("trial", 1 + +localStorage.getItem("trial"));
                 $('#trial').html(localStorage.getItem("trial"));
@@ -176,7 +175,6 @@ $(document).ready(function () {
                 else {
                     var scoreToGet = parseInt($('#scoretoGet').text());
                     localStorage.setItem("wynik", scoreToGet + +localStorage.getItem("wynik"));
-                    addScoreToRank();
                     window.location.href = "/guessWho";
 
                 }
@@ -288,6 +286,7 @@ $(document).ready(function () {
             $('#score').html(+localStorage.getItem("wynik"));
             $('#campiagn_search_id').val('');
             $('#answerOne').html(originalAnswer.charAt(0).toUpperCase() + originalAnswer.slice(1));
+            addScoreToRank();
             localStorage.removeItem("firstLetterOfSurname");
             skipPlayer(3000);
         }

@@ -159,7 +159,6 @@ def addScoreToRank(request):
     user = request.user
     games = request.POST.get('game')
     score = request.POST.get('scores')
-    print('xddd')
     if user.is_authenticated:
         if Rank.objects.filter(user=user).filter(games=games).exists():
             actual = get_object_or_404(Rank, user=user, games=games)
