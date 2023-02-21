@@ -147,3 +147,4 @@ def scatterCheck(request):
                 indexToMark.append(inputs.index(e))
                 inputs[inputs.index(e)] = 'ok'
         return HttpResponse(indexToMark)
+
