@@ -369,8 +369,6 @@ function getScore(){
 function addScoreToRank(){
     var game = getGameName();
     var scores = getScore();
-    console.log(game);
-    console.log(scores);
     $.ajax({
         type: 'POST',
         url: '/addScoreToRank/',
