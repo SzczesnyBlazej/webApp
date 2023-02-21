@@ -1,11 +1,15 @@
 import json
 import random
 
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from unidecode import unidecode
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.templatetags.static import static
 
+from games.models import Rank
 from myQuizGame.settings import BASE_DIR
 
 
@@ -148,3 +152,21 @@ def scatterCheck(request):
                 inputs[inputs.index(e)] = 'ok'
         return HttpResponse(indexToMark)
 
+
+@csrf_exempt
+@require_POST
+def addScoreToRank(request):
+    user = request.user
+    games = request.POST.get('game')
+    score = request.POST.get('scores')
+    print('xddd')
+    if user.is_authenticated:
+        if Rank.objects.filter(user=user).filter(games=games).exists():
+            actual = get_object_or_404(Rank, user=user, games=games)
+            if int(actual.score) < int(score):
+                actual.score = score
+                actual.save()
+        else:
+            newScore = Rank(user=user, games=games, score=score)
+            newScore.save()
+    return JsonResponse({'success': True})

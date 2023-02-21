@@ -176,6 +176,7 @@ $(document).ready(function () {
                 else {
                     var scoreToGet = parseInt($('#scoretoGet').text());
                     localStorage.setItem("wynik", scoreToGet + +localStorage.getItem("wynik"));
+                    addScoreToRank();
                     window.location.href = "/guessWho";
 
                 }
@@ -219,6 +220,7 @@ $(document).ready(function () {
                     $("#modalContentText").html(data);
                     $("#currentScore").html(' ' + +localStorage.getItem("wynik") + 'pkt');
                     $("#bsModal3").modal('show');
+                    addScoreToRank();
                     localStorage.removeItem("wynik");
                     $(".hideAnswer").css('display', 'none');
                     $(".showAnswer").css('display', 'inline-block');
@@ -354,4 +356,31 @@ function advicesForScatter(){
             return false;
         }
     }
+}
+function getGameName(){
+    var game=window.location.pathname;
+    game=game.substring(1, game.length-1);
+    return game
+}
+function getScore(){
+    var currentScores=localStorage.getItem("wynik");
+    return currentScores
+}
+
+function addScoreToRank(){
+    var game = getGameName();
+    var scores = getScore();
+    console.log(game);
+    console.log(scores);
+    $.ajax({
+        type: 'POST',
+        url: '/addScoreToRank/',
+        data: {game: game, scores: scores},
+        success: function(response) {
+
+        },
+        error: function(response) {
+
+        }
+    });
 }
