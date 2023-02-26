@@ -15,5 +15,6 @@ urlpatterns = [
 
     path('addScoreToRank/', addScoreToRank),
     path('showRank/', showRank, name='showRank'),
+    path('showRankButton/', showRankButton, name='showRankButton'),
 
 ]

@@ -68,7 +68,7 @@ $(document).ready(function() {
 });
 
 
-
+// ranking
 $(document).ready(function() {
     $('#rankingModal').on('show.bs.modal', function (e) {
         var modalRanking = $(this);
@@ -76,7 +76,32 @@ $(document).ready(function() {
         $.ajax({
             url: url,
             success: function(data) {
-            var rankingScore = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">User</th><th scope="col">Gra</th><th scope="col">Punkty</th></tr></thead><tbody>';
+            var rankingScore = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">Gracz</th><th scope="col">Punkty</th></tr></thead><tbody>';
+                for (var i = 0; i < data.rank.length; i++) {
+                    rankingScore+='<tr><th scope="row">'+(i+1)+'</th>';
+                    rankingScore+='<td>'+data.rank[i].user+'</td>';
+//                    rankingScore+='<td>'+data.rank[i].games+'</td>';
+                    rankingScore+='<td>'+data.rank[i].score+'</td></tr>';
+                }
+                rankingScore += '</tbody></table>';
+
+                modalRanking.find('#wraperContext').html(rankingScore);
+            }
+        });
+    });
+
+    $('.rankButtons').on('click', function (e) {
+        var modalRanking = $('#rankingModal');
+        var url = "/showRankButton/";
+        var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {'filtrujRanking':this.id},
+            headers: { 'X-CSRFToken': csrftoken },
+            success: function(data) {
+            var rankingScore = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">Gracz</th><th scope="col">Gra</th><th scope="col">Punkty</th></tr></thead><tbody>';
                 for (var i = 0; i < data.rank.length; i++) {
                     rankingScore+='<tr><th scope="row">'+(i+1)+'</th>';
                     rankingScore+='<td>'+data.rank[i].user+'</td>';

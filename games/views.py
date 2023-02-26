@@ -2,6 +2,7 @@ import json
 import random
 
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from unidecode import unidecode
@@ -172,6 +173,14 @@ def addScoreToRank(request):
 
 
 def showRank(request):
-    rank= Rank.objects.order_by('-score')
+    # rank= Rank.objects.order_by('-score')
+    result = Rank.objects.values('user').order_by('user').annotate(score=Sum('score'))
+    return JsonResponse({'rank':list(result)})
+    # return JsonResponse({'rank':list(result.values())})
 
-    return JsonResponse({'rank':list(rank.values())})
+def showRankButton(request):
+
+    if request.method == 'POST':
+        filtruj = request.POST.get('filtrujRanking')
+        rank= Rank.objects.all().filter(games=str(filtruj))
+        return JsonResponse({'rank':list(rank.values())})

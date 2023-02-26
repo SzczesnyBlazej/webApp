@@ -1,6 +1,7 @@
 {% load static %}
 
-<a class="nav-item nav-link" id="showRank" href="#" data-bs-toggle="modal" data-bs-target="#rankingModal"><i style="line-height:normal;" class="fa-solid fa-trophy fa-xl"></i></a>
+<a class="nav-item nav-link" id="showRank" href="#" data-bs-toggle="modal" data-bs-target="#rankingModal"><i
+        style="line-height:normal;" class="fa-solid fa-trophy fa-xl"></i></a>
 
 <div class="modal fade" id="rankingModal" tabindex="-1" aria-labelledby="rankingModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
@@ -9,9 +10,24 @@
                 <h5 class="modal-title" id="rankingModalLabel">Ranking - Soccer website</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body text-dark" id="wraperContext">
+            <div class="modal-body text-dark">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <form method="post">
+                            {% csrf_token %}
+                            <th class="text-center"><a href="#GuessWho" id="guessWho" class="rankButtons text-dark">Guess
+                                Who</a></th>
+                            <th class="text-center"><a href="#WhoMore" id="whoMore" class="rankButtons text-dark">Who
+                                More</a></th>
+                            <th class="text-center"><a href="#Scatter" id="scatter" class="rankButtons text-dark">Scatter</a>
+                            </th>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
 
-
+                <div id="wraperContext"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
