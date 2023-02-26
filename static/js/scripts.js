@@ -69,6 +69,28 @@ $(document).ready(function() {
 
 
 
+$(document).ready(function() {
+    $('#rankingModal').on('show.bs.modal', function (e) {
+        var modalRanking = $(this);
+        var url = "/showRank/";
+        $.ajax({
+            url: url,
+            success: function(data) {
+            var rankingScore = '<table class="table"><thead><tr><th scope="col">#</th><th scope="col">User</th><th scope="col">Gra</th><th scope="col">Punkty</th></tr></thead><tbody>';
+                for (var i = 0; i < data.rank.length; i++) {
+                    rankingScore+='<tr><th scope="row">'+(i+1)+'</th>';
+                    rankingScore+='<td>'+data.rank[i].user+'</td>';
+                    rankingScore+='<td>'+data.rank[i].games+'</td>';
+                    rankingScore+='<td>'+data.rank[i].score+'</td></tr>';
+                }
+                rankingScore += '</tbody></table>';
+
+                modalRanking.find('#wraperContext').html(rankingScore);
+            }
+        });
+    });
+});
+
 $(document).ready(function () {
     checkPathName();
     if (window.location.pathname == "/guessWho/") {

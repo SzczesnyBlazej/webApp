@@ -169,3 +169,9 @@ def addScoreToRank(request):
             newScore = Rank(user=user, games=games, score=score)
             newScore.save()
     return JsonResponse({'success': True})
+
+
+def showRank(request):
+    rank= Rank.objects.order_by('-score')
+
+    return JsonResponse({'rank':list(rank.values())})

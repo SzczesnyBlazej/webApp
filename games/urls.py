@@ -13,6 +13,7 @@ urlpatterns = [
     path('scatter/', scatter),
     path('scatterCheck/', scatterCheck, name='scatterCheck'),
 
-    path('addScoreToRank/', addScoreToRank)
+    path('addScoreToRank/', addScoreToRank),
+    path('showRank/', showRank, name='showRank'),
 
 ]
